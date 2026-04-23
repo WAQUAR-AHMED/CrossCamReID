@@ -1,0 +1,11 @@
+numpy>=2.0.0
+opencv-python>=4.10.0
+onnxruntime-gpu>=1.18.0
+qdrant-client>=1.9.0
+PyYAML>=6.0.0
+ultralytics>=8.3.0
+
+# Optional TensorRT backend dependencies:
+# tensorrt
+# pycuda
+

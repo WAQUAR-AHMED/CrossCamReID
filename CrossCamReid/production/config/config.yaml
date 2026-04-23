@@ -1,0 +1,38 @@
+sources:
+  master: "rtsp://admin:hikvision_ipcam@192.168.1.101:554/Streaming/Channels/101"
+  slave: "rtsp://admin:industry4@192.168.1.8:554/cam/realmonitor?channel=1&subtype=0"
+
+models:
+  pose_path: "../../../yolov8m-pose.pt"
+  reid_onnx_path: "../../../../resnet50-v2-7.onnx"
+  reid_tensorrt_engine_path: null
+
+capture:
+  buffer_size: 1
+  reconnect_initial_delay_sec: 2.0
+  reconnect_max_delay_sec: 30.0
+  max_read_failures: 30
+
+gating:
+  person_conf_thresh: 0.40
+  keypoint_conf_thresh: 0.50
+  match_thresh: 0.85
+  min_region_side: 30
+  region_pad_frac: 0.05
+  max_embeddings_per_sid: 30
+
+enrollment:
+  qualify_frames: 90
+  enroll_frames: 5
+
+database:
+  path: "../../../reid_qdrant_db_v2"
+  collection: "person_reid_torso"
+  keep_db: false
+
+runtime:
+  tracker: "bytetrack.yaml"
+  reid_backend: "onnxruntime"   # onnxruntime | tensorrt
+  no_display: false
+  display_width: 1600
+  log_json: false
